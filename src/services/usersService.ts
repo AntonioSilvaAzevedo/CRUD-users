@@ -3,11 +3,10 @@ import { User } from '@/types/user';
 
 export class UsersService {
   static async getUsers(page = 1, limit = 10) {
-    // Primeiro, buscar o total de itens
     const totalResponse = await api.get<User[]>('/users');
     const total = totalResponse.data.length;
 
-    // Depois, buscar a página específica
+
     const { data } = await api.get<User[]>('/users', {
       params: { 
         page, 
@@ -17,13 +16,6 @@ export class UsersService {
       },
     });
     
-    console.log('API Response:', { 
-      data, 
-      total,
-      currentPage: page,
-      limit,
-      totalPages: Math.ceil(total / limit)
-    });
     
     return {
       users: data,
