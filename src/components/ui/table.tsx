@@ -8,16 +8,15 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
-      className="relative w-full overflow-hidden rounded-bk-lg border border-[var(--color-border)] rounded-xl"
+      className="relative w-full overflow-x-auto rounded-bk-lg border border-[var(--color-border)] rounded-xl"
     >
-      <table
-        data-slot="table"
-        className={cn(
-          "w-full caption-bottom text-sm overflow-hidden",
-          className
-        )}
-        {...props}
-      />
+      <div className="min-w-[800px]">
+        <table
+          data-slot="table"
+          className={cn("w-full caption-bottom text-sm", className)}
+          {...props}
+        />
+      </div>
     </div>
   );
 }
@@ -80,7 +79,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "h-12 px-4 text-left align-middle font-semibold text-[var(--color-primary)]",
+        "h-12 px-4 text-left align-middle font-semibold text-[var(--color-primary)] whitespace-nowrap",
         "[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className
       )}
@@ -94,7 +93,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "px-4 py-3 align-middle text-[var(--color-foreground)]",
+        "px-4 py-3 align-middle text-[var(--color-foreground)] whitespace-nowrap",
         "[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className
       )}

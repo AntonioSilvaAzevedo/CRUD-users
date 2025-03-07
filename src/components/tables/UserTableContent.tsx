@@ -34,7 +34,7 @@ export function UserTableContent({
     <UserTable
       users={data.users}
       currentPage={currentPage}
-      totalPages={Math.ceil(data.total / limit)}
+      totalPages={data.totalPages}
     />
   );
 }

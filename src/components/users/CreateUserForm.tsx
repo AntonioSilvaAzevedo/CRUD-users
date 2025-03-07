@@ -6,7 +6,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -15,6 +14,7 @@ import { userFormSchema } from "@/schemas/userFormSchema";
 import { User } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 interface CreateUserFormProps {
@@ -46,11 +46,12 @@ export function CreateUserForm({
   });
 
   const onSubmit = (values: z.infer<typeof userFormSchema>) => {
-    if (user) {
+    if (user?.id) {
       updateUser(
         { userId: user.id, userData: values },
         {
           onSuccess: () => {
+            toast.success("Usuário atualizado com sucesso!");
             form.reset();
             onClose?.();
             onSuccess?.();
@@ -61,12 +62,10 @@ export function CreateUserForm({
       createUser(
         {
           ...values,
-          account: Math.random().toString(36).substring(2, 11),
-          mother: "Nome da Mãe",
-          createdAt: new Date().toISOString(),
         },
         {
           onSuccess: () => {
+            toast.success("Usuário criado com sucesso!");
             form.reset();
             onClose?.();
             onSuccess?.();
@@ -84,9 +83,8 @@ export function CreateUserForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} label="Nome" placeholder="Digite o nome" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -97,9 +95,13 @@ export function CreateUserForm({
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} type="email" />
+                <Input
+                  {...field}
+                  label="Email"
+                  type="email"
+                  placeholder="Digite o email"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -110,9 +112,8 @@ export function CreateUserForm({
           name="job"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Cargo</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} label="Cargo" placeholder="Digite o cargo" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -123,9 +124,12 @@ export function CreateUserForm({
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Empresa</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  label="Empresa"
+                  placeholder="Digite a empresa"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -136,9 +140,12 @@ export function CreateUserForm({
           name="city"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Cidade</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  label="Cidade"
+                  placeholder="Digite a cidade"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -149,9 +156,8 @@ export function CreateUserForm({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>País</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} label="País" placeholder="Digite o país" />
               </FormControl>
               <FormMessage />
             </FormItem>

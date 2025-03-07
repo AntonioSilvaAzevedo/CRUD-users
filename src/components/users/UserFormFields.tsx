@@ -2,7 +2,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -22,11 +21,8 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                Nome
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite o nome" {...field} />
+                <Input {...field} label="Nome" placeholder="Digite o nome" />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>
@@ -38,11 +34,13 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                Email
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite o email" type="email" {...field} />
+                <Input
+                  {...field}
+                  label="Email"
+                  type="email"
+                  placeholder="Digite o email"
+                />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>
@@ -56,11 +54,8 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="job"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                Cargo
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite o cargo" {...field} />
+                <Input {...field} label="Cargo" placeholder="Digite o cargo" />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>
@@ -72,11 +67,12 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                Empresa
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite a empresa" {...field} />
+                <Input
+                  {...field}
+                  label="Empresa"
+                  placeholder="Digite a empresa"
+                />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>
@@ -90,11 +86,12 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="city"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                Cidade
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite a cidade" {...field} />
+                <Input
+                  {...field}
+                  label="Cidade"
+                  placeholder="Digite a cidade"
+                />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>
@@ -106,11 +103,8 @@ export function UserFormFields({ form }: UserFormFieldsProps) {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-[var(--color-foreground)]">
-                País
-              </FormLabel>
               <FormControl>
-                <Input placeholder="Digite o país" {...field} />
+                <Input {...field} label="País" placeholder="Digite o país" />
               </FormControl>
               <FormMessage className="text-xs text-red-500 mt-1" />
             </FormItem>

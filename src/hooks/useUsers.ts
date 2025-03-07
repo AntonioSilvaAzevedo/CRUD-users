@@ -1,12 +1,23 @@
-
 import { User } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UsersService } from '../services/usersService';
 
+interface UsersResponse {
+  users: User[];
+  total: number;
+  totalPages: number;
+}
+
 export function useUsers(page = 1, limit = 10) {
-  return useQuery({
+  return useQuery<UsersResponse>({
     queryKey: ['users', page, limit],
-    queryFn: () => UsersService.getUsers(page, limit),
+    queryFn: async () => {
+      const response = await UsersService.getUsers(page, limit);
+      return {
+        ...response,
+        totalPages: Math.ceil(response.total / limit),
+      };
+    },
   });
 }
 

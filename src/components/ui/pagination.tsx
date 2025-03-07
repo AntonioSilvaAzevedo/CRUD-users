@@ -1,9 +1,5 @@
 import { cn } from "@/lib/utils";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import * as React from "react";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
@@ -104,30 +100,9 @@ function PaginationNext({
   );
 }
 
-function PaginationEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      aria-hidden
-      data-slot="pagination-ellipsis"
-      className={cn(
-        "flex h-8 w-8 items-center justify-center text-sm",
-        className
-      )}
-      {...props}
-    >
-      <MoreHorizontalIcon className="h-3.5 w-3.5" />
-      <span className="sr-only">Mais páginas</span>
-    </span>
-  );
-}
-
 export {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,

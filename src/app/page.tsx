@@ -15,7 +15,7 @@ export default function Home({ searchParams }: HomeProps) {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Lista de Usuários</h1>
+        <h1></h1>
         <CreateUserModal />
       </div>
       <Suspense fallback={<p>Carregando...</p>}>

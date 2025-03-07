@@ -7,9 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useDeleteConfirmation } from "@/hooks/useDeleteConfirmation";
 import { useDeleteUser } from "@/hooks/useUsers";
 import { User } from "@/types/user";
 import { Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 import { CreateUserModal } from "../users/CreateUserModal";
 
 interface TableContentProps {
@@ -19,15 +21,22 @@ interface TableContentProps {
 
 export function TableContent({ users, onUserDeleted }: TableContentProps) {
   const { mutate: deleteUser } = useDeleteUser();
+  const { showDeleteConfirmation } = useDeleteConfirmation();
 
-  const handleDeleteUser = (userId: string) => {
-    if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
-      deleteUser(userId, {
-        onSuccess: () => {
-          onUserDeleted?.();
-        },
-      });
-    }
+  const handleDeleteUser = (userId: string, userName: string) => {
+    showDeleteConfirmation(`o usuário ${userName}`, {
+      onConfirm: () => {
+        deleteUser(userId, {
+          onSuccess: () => {
+            toast.success("Usuário excluído com sucesso!");
+            onUserDeleted?.();
+          },
+          onError: () => {
+            toast.error("Erro ao excluir usuário");
+          },
+        });
+      },
+    });
   };
 
   return (
@@ -64,8 +73,9 @@ export function TableContent({ users, onUserDeleted }: TableContentProps) {
               <TableCell>
                 <Button
                   variant="secondary"
-                  onClick={() => handleDeleteUser(user.id)}
-                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                  onClick={() =>
+                    user.id && handleDeleteUser(user.id, user.name)
+                  }
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
